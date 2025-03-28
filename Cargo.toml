@@ -1,0 +1,17 @@
+[package]
+name = "fhs-quick-fox-status"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.40"
+clap = { version = "4.0", features = ["derive"] }
+config = "0.15.11"
+glob = "0.3.2"
+prettytable = "0.10.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[[bin]]
+name = "quick_fox_status"
+path = "src/main.rs"
