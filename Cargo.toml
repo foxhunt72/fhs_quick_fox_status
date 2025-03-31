@@ -1,6 +1,6 @@
 [package]
 name = "fhs-quick-fox-status"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 [dependencies]
@@ -15,3 +15,7 @@ serde_json = "1.0"
 [[bin]]
 name = "quick_fox_status"
 path = "src/main.rs"
+
+[[bin]]
+name = "quick_fox_status_run"
+path = "src/run.rs"

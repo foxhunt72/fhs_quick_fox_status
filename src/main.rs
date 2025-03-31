@@ -28,7 +28,7 @@ fn main() {
     };
 
     let matches = Command::new("quick fox status CLI")
-        .version("0.1.0")
+        .version("0.1.1")
         .author("Richard de Vos")
         .about("CLI for managing Quick Fox Status")
         .subcommand(Command::new("discovery").about("list discovery for zabbix"))

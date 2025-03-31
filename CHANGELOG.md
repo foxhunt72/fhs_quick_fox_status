@@ -10,4 +10,5 @@ Shortlist to come:
 
 -------------------------------------
 0.1.0: initial setup of git repo
+0.1.1: created first version of quick_fox_status_run
 

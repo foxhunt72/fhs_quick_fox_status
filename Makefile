@@ -6,6 +6,9 @@ CARGO_TOML := Cargo.toml
 DEBUG_TARGET := target/debug/quick_fox_status
 RELEASE_TARGET := target/release/quick_fox_status
 INSTALL_PATH := /usr/local/bin/quick_fox_status
+DEBUG_TARGET2 := target/debug/quick_fox_status_run
+RELEASE_TARGET2 := target/release/quick_fox_status_run
+INSTALL_PATH2 := /usr/local/bin/quick_fox_status_run
 SPOOL_DIR := /var/spool/quick_fox_status
 ZABBIX_USER ?= zabbix
 
@@ -13,21 +16,29 @@ ZABBIX_USER ?= zabbix
 
 all: debug
 
-debug: $(DEBUG_TARGET)
+debug: $(DEBUG_TARGET) ${DEBUG_TARGET2}
 
-release: $(RELEASE_TARGET)
+release: $(RELEASE_TARGET) ${RELEASE_TARGET2}
 
 $(DEBUG_TARGET): $(SRC_FILES) $(CARGO_TOML)
+	cargo build
+
+$(DEBUG_TARGET2): $(SRC_FILES) $(CARGO_TOML)
 	cargo build
 
 $(RELEASE_TARGET): $(SRC_FILES) $(CARGO_TOML)
 	cargo build --release
 
-install: $(RELEASE_TARGET)
-	sudo install -m 755 $(RELEASE_TARGET) $(INSTALL_PATH)
+$(RELEASE_TARGET2): $(SRC_FILES) $(CARGO_TOML)
+	cargo build --release
 
-install_suid: $(RELEASE_TARGET)
+install: $(RELEASE_TARGET) $(RELEASE_TARGET2)
+	sudo install -m 755 $(RELEASE_TARGET) $(INSTALL_PATH)
+	sudo install -m 755 $(RELEASE_TARGET2) $(INSTALL_PATH2)
+
+install_suid: $(RELEASE_TARGET) $(RELEASE_TARGET2)
 	sudo install -m 4755 -o $(ZABBIX_USER) $(RELEASE_TARGET) $(INSTALL_PATH)
+	sudo install -m 755 $(RELEASE_TARGET2) $(INSTALL_PATH2)
 	sudo mkdir -p $(SPOOL_DIR)
 	sudo chown $(ZABBIX_USER):$(ZABBIX_USER) $(SPOOL_DIR)
 	sudo chmod 700 $(SPOOL_DIR)

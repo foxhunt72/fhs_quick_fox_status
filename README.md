@@ -1,7 +1,7 @@
 quick_fox_status
 ================
 
-Quick Fox Status: version 0.1.0
+Quick Fox Status: version 0.1.1
 -----------
 #### ** For changes see** [changelog](CHANGELOG.md).
 
